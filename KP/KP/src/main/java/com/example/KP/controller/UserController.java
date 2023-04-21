@@ -18,21 +18,10 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    @GetMapping("/registration")
-    public String registration(Model model){
-        return "registration";
-    }
-    @GetMapping("/sing")
-    public String sing(Model model){
-        return "singUser";
-    }
-    @GetMapping("/registration/clear")
-    public String clearForm(Model model){
-        return "redirect:/registration";
-    }
+
     @PostMapping("/registration")
     public String createUser(User user) throws IOException {
         userService.saveUser(user);
-        return "redirect:/home";
+        return "redirect:/mainHome";
     }
 }
