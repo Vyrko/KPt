@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BOOKSELL</title>
+</head>
+<body>
+<div class="col-lg-4" th:each="e:${book}">
+    <form th:action="*{'/home/book/delete/' + e.getId() }" method="get">
+<h1>Информация</h1>
+    <img th:src="*{'/image/' + e.previewImageId }"  height="300px" alt="alt"/><br><br>
+<b>Название:  </b><b th:text="${e.name}"/> <br>
+<b>Цена:  </b><b th:text="${e.cost}"/> <br>
+        <div th:if="${genre}!=null" th:each="g:${genre}">
+            <b>Жанр:  </b><b th:text="${g.name}"/> <br>
+            </div>
+        <input type="submit" value="Удалить"/>
+<hr>
+</form>
+    <img>
+</div>
+</body>
+</html>
+
