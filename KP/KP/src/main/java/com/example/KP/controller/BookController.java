@@ -26,12 +26,12 @@ public class BookController {
         model.addAttribute("books", bookService.listBooks(nameBook));
         return "home";
     }
-    @PostMapping("/book/create")
+    /*@PostMapping("/book/create")
     public String createBook(@RequestParam("file1") MultipartFile file1,
                              Book book) throws IOException {
         bookService.saveBook(book,file1);
         return "redirect:/adminHome";
-    }
+    }*/
     @GetMapping("/book/{id}")
     public String bookInfo(@PathVariable Long id, Model model){
         Book book=bookService.getBookById(id);

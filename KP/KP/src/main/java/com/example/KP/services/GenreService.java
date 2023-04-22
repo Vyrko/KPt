@@ -15,10 +15,14 @@ import java.util.List;
 public class GenreService {
     private final GenreRepository genreRepository;
 
+
     public Iterable<Genre> readGenreByBookId(Long id) {
         return genreRepository.findAllByBookId(id);
     }
     public Iterable<Genre> readAllGenre(){
         return genreRepository.findAll();
+    }
+    public List<Genre> readGenreById(List<Long> id) {
+        return genreRepository.findAllById(id);
     }
 }

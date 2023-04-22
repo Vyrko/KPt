@@ -1,8 +1,10 @@
 package com.example.KP.services;
 
 import com.example.KP.entity.Book;
+import com.example.KP.entity.Genre;
 import com.example.KP.entity.Image;
 import com.example.KP.repository.BookRepository;
+import com.example.KP.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class BookService {
+    private final GenreRepository genreRepository;
     private final BookRepository bookRepository;
 
     public List<Book> AllBook(){
@@ -36,7 +39,7 @@ public class BookService {
      Iterable<Book> books = bookRepository.findAll();
      return books;
     }
-    public void saveBook(Book book, MultipartFile file) throws IOException {
+    public void saveBook(Book book, MultipartFile file, List<Genre> genres) throws IOException {
         Image image;
         if (file.getSize() !=0){
             image=toImageEntity(file);
@@ -46,7 +49,12 @@ public class BookService {
         log.info("Saving new Book. Name {}", book.getName());
         Book bookFromDb=bookRepository.save(book);
         bookFromDb.setPreviewImageId(bookFromDb.getImages().get(0).getId());
-        bookRepository.save(book);
+        for(int i =0; i<genres.size(); i++)
+        {
+            Genre genre = genreRepository.findByName(genres.get(i).getName());
+            bookFromDb.setGenre(genre);
+        }
+        bookRepository.save(bookFromDb);
     }
     private Image toImageEntity(MultipartFile file) throws IOException {
         Image image=new Image();
