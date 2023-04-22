@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>BookSell</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cerulean/bootstrap.min.css">
-    <link rel="stylesheet" href="css/STYLE.css">
 </head>
 <body>
 <div class="container">
@@ -87,6 +86,28 @@
 
     </header>
 </div>
+<div class="container" >
+    <div class="row">
+        <div class="col-lg-4" th:each="e:${book}">
+            <img th:src="*{'/image/' + e.previewImageId }" height="280px" width="200" alt="alt"/><br><br><img>
+            <div class="form-floating mb-3" >
+                <h6 fon th:text="${e.cost}"/><b></b>
+            </div>
+            <div style="width: 220px" class="form-floating mb-3">
+            <b th:text="${e.name}"/><b></b>
+            </div>
+            <div style="color: grey" class="form-floating mb-3">
+                <b th:text="${e.author}"/><b></b>
+            </div>
+
+            <!--<div th:if="${genre}!=null" th:each="g:${genre}">
+                <b>Жанр: </b><b th:text="${g.name}"/> <br>
+            </div>-->
+
+        </div>
+    </div>
+</div>
+
+
 </body>
-<script rel="script" src="src/main/resources/templates/js/closeReg.js"></script>
 </html>

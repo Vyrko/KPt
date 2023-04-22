@@ -12,6 +12,6 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @ManyToOne(cascade =CascadeType.MERGE ,fetch = FetchType.LAZY)
     private Book book;
 }

@@ -22,7 +22,7 @@ public class Book {
     private Long id;
     private String name;
     private double cost;
-    @OneToMany(cascade = CascadeType.ALL, fetch =FetchType.LAZY,mappedBy = "book")
+    @OneToMany(cascade = CascadeType.MERGE, fetch =FetchType.LAZY,mappedBy = "book")
     private List<Genre> genres= new ArrayList<>();
     private String author;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,

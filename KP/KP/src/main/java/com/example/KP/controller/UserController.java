@@ -22,6 +22,6 @@ public class UserController {
     @PostMapping("/registration")
     public String createUser(User user) throws IOException {
         userService.saveUser(user);
-        return "redirect:/mainHome";
+        return "redirect:/";
     }
 }
