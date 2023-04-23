@@ -53,6 +53,8 @@
                     <input name="file1" type="file" class="form-control rounded-3" id="PhotoBookInput" >
                     <label for="PhotoBookInput">Фото</label>
                 </div>
+
+
                 <div class="form-floating mb-3" th:if="${genres}!=null" th:each="genre : ${genres}">
                         <input type="checkbox" name="checkboxGenre" th:value="${genre.getId()}" />
                         <label th:text="${genre.name}"></label>

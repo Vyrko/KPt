@@ -10,7 +10,9 @@
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="col-md-3 mb-2 mb-md-0">
             <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">BOOKSELL
-                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
             </a>
         </div>
 
@@ -23,8 +25,12 @@
         </ul>
 
         <div class="col-md-3 text-end">
-            <button onclick="document.getElementById('Registration').style.display='block'" type="button" id="openLogin" class="btn btn-outline-primary me-2">Регистрация</button>
-            <button onclick="document.getElementById('Login').style.display='block'" type="button" class="btn btn-primary">Вход</button>
+            <button onclick="document.getElementById('Registration').style.display='block'" type="button" id="openLogin"
+                    class="btn btn-outline-primary me-2">Регистрация
+            </button>
+            <button onclick="document.getElementById('Login').style.display='block'" type="button"
+                    class="btn btn-primary">Вход
+            </button>
         </div>
         <div id="Registration" class="modal">
             <div class="modal-dialog" role="document">
@@ -37,22 +43,28 @@
                     <div class="modal-body p-5 pt-0">
                         <form action="/registration" method="post" class="">
                             <div class="form-floating mb-3">
-                                <input name="email" type="email" class="form-control rounded-3" id="RegInput" placeholder="name@example.com">
+                                <input name="email" type="email" class="form-control rounded-3" id="RegInput"
+                                       placeholder="name@example.com">
                                 <label for="RegInput">Адрес электронной почты</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input name="password" type="password" class="form-control rounded-3" id="RegPassword" placeholder="Пароль">
+                                <input name="password" type="password" class="form-control rounded-3" id="RegPassword"
+                                       placeholder="Пароль">
                                 <label for="RegPassword">Пароль</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input name="name" type="text" class="form-control rounded-3" id="RegName" placeholder="Максим">
+                                <input name="name" type="text" class="form-control rounded-3" id="RegName"
+                                       placeholder="Максим">
                                 <label for="RegName">Имя</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input name="phoneNumber" type="text" class="form-control rounded-3" id="RegPhone" placeholder="+375292060541">
+                                <input name="phoneNumber" type="text" class="form-control rounded-3" id="RegPhone"
+                                       placeholder="+375292060541">
                                 <label for="RegPhone">Номер телефона</label>
                             </div>
-                            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Зарегистрироваться</button>
+                            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">
+                                Зарегистрироваться
+                            </button>
                         </form>
 
                     </div>
@@ -70,11 +82,13 @@
                     <div class="modal-body p-5 pt-0">
                         <form action="/sing/auth" method="post" class="">
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control rounded-3" id="loginEmail" placeholder="name@example.com">
+                                <input type="email" class="form-control rounded-3" id="loginEmail"
+                                       placeholder="name@example.com">
                                 <label for="loginEmail">Адрес электронной почты</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control rounded-3" id="loginPassword" placeholder="Password">
+                                <input type="password" class="form-control rounded-3" id="loginPassword"
+                                       placeholder="Password">
                                 <label for="loginPassword">Пароль</label>
                             </div>
                             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Вход</button>
@@ -86,27 +100,56 @@
 
     </header>
 </div>
-<div class="container" >
-    <div class="row">
-        <div class="col-lg-4" th:each="e:${book}">
-            <img th:src="*{'/image/' + e.previewImageId }" height="280px" width="200" alt="alt"/><br><br><img>
-            <div class="form-floating mb-3" >
-                <h6 fon th:text="${e.cost}"/><b></b>
-            </div>
-            <div style="width: 220px" class="form-floating mb-3">
-            <b th:text="${e.name}"/><b></b>
-            </div>
-            <div style="color: grey" class="form-floating mb-3">
-                <b th:text="${e.author}"/><b></b>
-            </div>
 
-            <!--<div th:if="${genre}!=null" th:each="g:${genre}">
-                <b>Жанр: </b><b th:text="${g.name}"/> <br>
-            </div>-->
 
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+            <div class="col"  th:each="e:${book}">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <img th:src="*{'/image/' + e.previewImageId }" height="280px" width="200px" /><br><br><img>
+                        <div class="form-floating mb-3">
+                            <p class="card-text"><h4 fon th:text="${e.cost}"/><b></b></p>
+                            <p class="card-text"> <b th:text="${e.name}"/><b></b></p>
+                            <p style="color: grey" class="card-text"><b th:text="${e.author}"/><b></b></p>
+
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
+
+
+<!--<div class="container">
+    <div class="row">
+        <div class="col-lg-4" th:each="e:${book}">
+            <div style="width: 220px" class="form-floating mb-3">
+                <img th:src="*{'/image/' + e.previewImageId }" height="280px" width="200" alt="alt"/><br><br><img>
+                <h4 fon th:text="${e.cost}"/><b></b>
+
+                <b th:text="${e.name}"/><b></b>
+
+                <div style="color: grey" class="form-floating mb-">
+                    <b th:text="${e.author}"/><b></b>
+                </div>
+
+                &lt;!&ndash;<div th:if="${genre}!=null" th:each="g:${genre}">
+                    <b>Жанр: </b><b th:text="${g.name}"/> <br>
+                </div>&ndash;&gt;
+            </div>
+        </div>
+    </div>
+</div>-->
 
 
 </body>
