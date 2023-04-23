@@ -16,9 +16,9 @@ public class GenreService {
     private final GenreRepository genreRepository;
 
 
-    public Iterable<Genre> readGenreByBookId(Long id) {
-        return genreRepository.findAllByBookId(id);
-    }
+   /* public Iterable<Genre> readGenreByBookId(Long id) {
+        return genreRepository(id);
+    }*/
     public Iterable<Genre> readAllGenre(){
         return genreRepository.findAll();
     }

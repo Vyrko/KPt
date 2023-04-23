@@ -47,13 +47,14 @@ public class BookService {
             book.addImageToBook(image);
         }
         log.info("Saving new Book. Name {}", book.getName());
+        book.setGenres(genres);
         Book bookFromDb=bookRepository.save(book);
         bookFromDb.setPreviewImageId(bookFromDb.getImages().get(0).getId());
-        for(int i =0; i<genres.size(); i++)
+        /*for(int i =0; i<genres.size(); i++)
         {
             Genre genre = genreRepository.findByName(genres.get(i).getName());
             bookFromDb.setGenre(genre);
-        }
+        }*/
         bookRepository.save(bookFromDb);
     }
     private Image toImageEntity(MultipartFile file) throws IOException {

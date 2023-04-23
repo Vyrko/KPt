@@ -3,6 +3,8 @@ package com.example.KP.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "genres")
@@ -12,6 +14,6 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(cascade =CascadeType.MERGE ,fetch = FetchType.LAZY)
-    private Book book;
+    @ManyToMany( mappedBy = "genres",fetch = FetchType.LAZY)
+    private List<Book> books;
 }

@@ -35,10 +35,10 @@ public class BookController {
     @GetMapping("/book/{id}")
     public String bookInfo(@PathVariable Long id, Model model){
         Book book=bookService.getBookById(id);
-        Iterable<Genre> genres = genreService.readGenreByBookId(id);
+        /*Iterable<Genre> genres = genreService.readGenreByBookId(id);*/
         model.addAttribute("book",book);
         model.addAttribute("image",book.getImages());
-        model.addAttribute("genre", genres);
+        /*model.addAttribute("genre", genres);*/
         return "Book-info";
     }
     @GetMapping("/book")

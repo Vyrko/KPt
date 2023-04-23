@@ -22,22 +22,30 @@ public class Book {
     private Long id;
     private String name;
     private double cost;
-    @OneToMany(cascade = CascadeType.REMOVE, fetch =FetchType.LAZY,mappedBy = "book")
-    private List<Genre> genres= new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "books_genres",
+            joinColumns = {
+                    @JoinColumn(name = "book_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "genre_id", referencedColumnName = "id")
+            }
+    )
+    private List<Genre> genres = new ArrayList<>();
     private String author;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,
-    mappedBy = "book")
-    private List<Image> images=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            mappedBy = "book")
+    private List<Image> images = new ArrayList<>();
     private Long previewImageId;
     private LocalDateTime dataOfCreated;
+
     @PrePersist
-    private void init(){dataOfCreated=LocalDateTime.now();}
-    public void addImageToBook(Image image){
+    private void init() {
+        dataOfCreated = LocalDateTime.now();
+    }
+
+    public void addImageToBook(Image image) {
         image.setBook(this);
         images.add(image);
-    }
-    public void setGenre(Genre genre){
-        genre.setBook(this);
-        genres.add(genre);
     }
 }
