@@ -34,7 +34,7 @@ public class AdminHomeController {
     public String createBook(@RequestParam("file1") MultipartFile file1,
                              @RequestParam("checkboxGenre") List<Long> idGenre,
                              Book book) throws IOException {
-        bookService.saveBook(book, file1,genreService.readGenreById(idGenre));
+        bookService.saveBook(book, file1,genreService.readAllGenresById(idGenre));
         return "redirect:/adminHome";
     }
 

@@ -10,7 +10,9 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book,Long> {
     List<Book> findByName(String name);
     List<Book> findByAuthor(String author);
-@Query("SELECT b from Book b " +
-        "WHERE b.genres =?1")
-    List<Book> findByGenres(Genre genres);
+@Query("SELECT b FROM Book b " +
+        "inner JOIN BooksGenres g ON g.bookId = b.id" +
+        " where  g.genreId =?1")
+    List<Book> findByGenres(Long genres);
+
 }

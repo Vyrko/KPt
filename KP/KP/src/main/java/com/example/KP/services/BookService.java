@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +37,6 @@ public class BookService {
         bookRepository.findById(id).orElse(null).removeBook();
         bookRepository.deleteById(id);
     }
-
     public void updateBook(Book newBook, MultipartFile file1) throws IOException {
         Book bookFromDb = bookRepository.findById(newBook.getId()).orElse(null);
         Image image;
@@ -91,7 +91,9 @@ public class BookService {
         return image;
     }
 
-    public Iterable<Book> AllBookByGenres(List<Long> idGenre) {
-        return bookRepository.findAll();///wfwefwef
+    public Iterable<Book> AllBookByGenre(Long idGenre) {
+        return bookRepository.findByGenres(idGenre);
     }
+
+
 }

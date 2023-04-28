@@ -22,7 +22,10 @@ public class GenreService {
     public Iterable<Genre> readAllGenre(){
         return genreRepository.findAll();
     }
-    public List<Genre> readGenreById(List<Long> id) {
+    public List<Genre> readAllGenresById(List<Long> id) {
         return genreRepository.findAllById(id);
     }
+//    public Genre readGenreById(Long id) {
+//        return genreRepository.findById(id);
+//    }
 }

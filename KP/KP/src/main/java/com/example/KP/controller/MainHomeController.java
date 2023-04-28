@@ -1,8 +1,10 @@
 package com.example.KP.controller;
 
 import com.example.KP.entity.Book;
+import com.example.KP.entity.Genre;
 import com.example.KP.entity.Image;
 import com.example.KP.services.BookService;
+import com.example.KP.services.GenreService;
 import com.example.KP.services.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,11 +21,14 @@ import java.util.List;
 public class MainHomeController {
     private final BookService bookService;
     private final ImageService imageService;
+    private final GenreService genreService;
     @GetMapping
     public String open(Model model)
     {
         Iterable<Book> books = bookService.readBook();
         Iterable<Image> images = imageService.readImg();
+        Iterable<Genre> genres =genreService.readAllGenre();
+        model.addAttribute("genres", genres);
         model.addAttribute("book",books);
         model.addAttribute("image",images);
         return "mainHome";
@@ -36,11 +41,13 @@ public class MainHomeController {
         model.addAttribute("image",images);
         return "mainHome";
     }
-    /*@GetMapping
-    public String getBooksByGenres(@RequestParam("checkboxGenre") List<Long> idGenre,
+    @GetMapping("/filter")
+    public String getBooksByGenres(@RequestParam("checkboxGenre") Long idGenre,
                                    Model model){
-        Iterable<Book> books=bookService.AllBookByGenres(idGenre);
+        Iterable<Book> books=bookService.AllBookByGenre(idGenre);
+        Iterable<Image> images = imageService.readImg();
         model.addAttribute("book", books);
-        return "redirect:/mainHome";
-    }*/
+        model.addAttribute("image",images);
+        return "mainHome";
+    }
 }
