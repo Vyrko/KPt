@@ -48,4 +48,19 @@ public class Book {
         image.setBook(this);
         images.add(image);
     }
+
+    public void removeBook() {
+        for (Genre genre : genres) {
+            genre.getBooks().remove(this);
+        }
+        this.genres.clear();
+    }
+    public void addGenre(Genre genre) {
+        this.genres.add(genre);
+        genre.getBooks().add(this);
+    }
+
+    public void removeImage() {
+        this.images.clear();
+    }
 }

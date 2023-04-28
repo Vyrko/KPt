@@ -21,4 +21,8 @@ public class ImageService {
         Iterable<Image> images = imageRepository.findAll();
         return  images;
     }
+
+    public void deleteImageByBookId(Long id) {
+        imageRepository.deleteById(id);
+    }
 }

@@ -23,8 +23,10 @@ public class AdminHomeController {
 
     @GetMapping
     public String adminHome(Model model) {
+        Iterable<Book> books=bookService.AllBook();
         Iterable<Genre> genres =genreService.readAllGenre();
                 model.addAttribute("genres", genres);
+                model.addAttribute("books", books);
         return "adminHome";
     }
 
@@ -39,6 +41,18 @@ public class AdminHomeController {
     @GetMapping("/book/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
+        return "redirect:/adminHome";
+    }
+    @GetMapping("/book/update/{id}")
+    public String BookToUpdate(@PathVariable Long id,Model model) {
+        model.addAttribute("book", bookService.getBookById(id));
+        model.addAttribute("image",bookService.getBookById(id).getImages());
+        return "updateBook";
+    }
+    @PostMapping("/book/update/{id}")
+    public String updateBook(@RequestParam("file1") MultipartFile file1,
+                             Book book) throws IOException {
+        bookService.updateBook(book, file1);
         return "redirect:/adminHome";
     }
 }

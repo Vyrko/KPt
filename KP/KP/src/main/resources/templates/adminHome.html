@@ -11,6 +11,7 @@
             justify-content: center;
             height: 100vh;
         }
+
         button {
             margin-top: 10px;
             padding: 10px;
@@ -29,42 +30,107 @@
 </div>
 
 <div id="addBook" class="modal">
-<div class="modal-dialog" role="document">
-    <div class="modal-content rounded-4 shadow">
-        <div class="modal-header p-5 pb-4 border-bottom-0">
-            <h1 class="fw-bold mb-0 fs-2">Новая книга</h1>
-            <a href=" ">X</a>
-        </div>
-        <div class="modal-body p-5 pt-0">
-            <form action="/adminHome/book/create" method="post" enctype="multipart/form-data">
-                <div class="form-floating mb-3">
-                    <input name="name" type="text" class="form-control rounded-3" id="NameBookInput" placeholder="Синие моря">
-                    <label for="NameBookInput">Название</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input name="author" type="text" class="form-control rounded-3" id="AuthorBookInput" placeholder="Пушкин А.С.">
-                    <label for="AuthorBookInput">Автор</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input name="cost" type="text" class="form-control rounded-3" id="CostBookInput" placeholder="50.4">
-                    <label for="CostBookInput">Стоимость</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input name="file1" type="file" class="form-control rounded-3" id="PhotoBookInput" >
-                    <label for="PhotoBookInput">Фото</label>
-                </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2">Новая книга</h1>
+                <a href=" ">X</a>
+            </div>
+            <div class="modal-body p-5 pt-0" style="height: 500px; overflow-y: scroll;">
+                <form action="/adminHome/book/create" method="post" enctype="multipart/form-data">
+                    <div class="form-floating mb-3">
+                        <input name="name" type="text" class="form-control rounded-3" id="NameBookInput"
+                               placeholder="Синие моря">
+                        <label for="NameBookInput">Название</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input name="author" type="text" class="form-control rounded-3" id="AuthorBookInput"
+                               placeholder="Пушкин А.С.">
+                        <label for="AuthorBookInput">Автор</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input name="cost" type="text" class="form-control rounded-3" id="CostBookInput"
+                               placeholder="50.4">
+                        <label for="CostBookInput">Стоимость</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input name="file1" type="file" class="form-control rounded-3" id="PhotoBookInput">
+                        <label for="PhotoBookInput">Фото</label>
+                    </div>
 
-
-                <div class="form-floating mb-3" th:if="${genres}!=null" th:each="genre : ${genres}">
-                        <input type="checkbox" name="checkboxGenre" th:value="${genre.getId()}" />
+                    <b>Жанры: </b>
+                    <div class="form-floating mb-3" th:if="${genres}!=null" th:each="genre : ${genres}">
+                        <input type="checkbox" name="checkboxGenre" th:value="${genre.getId()}"/>
                         <label th:text="${genre.name}"></label>
-                </div>
-                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Добавить</button>
-            </form>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Добавить</button>
+                </form>
 
+            </div>
         </div>
     </div>
 </div>
+
+<div id="getBooks" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2">Книги</h1>
+                <a href=" ">X</a>
+            </div>
+            <div class="modal-body p-5 pt-0" style="height: 500px; overflow-y: scroll;">
+                <div class="container border-bottom" th:if="${books}!=null" th:each="book : ${books}">
+                    <form>
+                        <b>Название: </b><b th:text="${book.name}"/> <br>
+                        <b>Цена: </b><b th:text="${book.cost}"/> <br>
+                        <b>Автор: </b><b th:text="${book.author}"/> <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="updateBook" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2">Редактирование книги</h1>
+                <a href=" ">X</a>
+            </div>
+            <div class="modal-body p-5 pt-0" style="height: 500px; overflow-y: scroll;">
+                <div class="container border-bottom" th:if="${books}!=null" th:each="book : ${books}">
+                    <form th:action="*{'/adminHome/book/update/' + book.getId() }" method="get">
+                        <b>Название: </b><b th:text="${book.name}"/> <br>
+                        <b>Цена: </b><b th:text="${book.cost}"/> <br>
+                        <b>Автор: </b><b th:text="${book.author}"/> <br>
+                        <input type="submit" value="Открыть"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteBook" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2">Удаление книги</h1>
+                <a href=" ">X</a>
+            </div>
+            <div class="modal-body p-5 pt-0" style="height: 500px; overflow-y: scroll;">
+                <div class="container border-bottom" th:if="${books}!=null" th:each="book : ${books}">
+                    <form th:action="*{'/adminHome/book/delete/' + book.getId() }" method="get">
+                        <b>Название: </b><b th:text="${book.name}"/> <br>
+                        <b>Цена: </b><b th:text="${book.cost}"/> <br>
+                        <b>Автор: </b><b th:text="${book.author}"/> <br>
+                        <input type="submit" value="Удалить"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

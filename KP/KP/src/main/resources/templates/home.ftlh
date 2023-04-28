@@ -11,6 +11,10 @@
     Поиск по названию: <input type="text" name="nameBook"><br>
     <input type="submit" value="Поиск"/>
 </form>
+    <button class="btn btn-primary rounded-circle p-2 lh-1" type="button">
+        <svg class="bi" width="16" height="16"><use xlink:href="#x-lg"></use></svg>
+        <span class="visually-hidden">Dismiss</span>
+    </button>
 <#list books as book>
     <div>
         <p>
