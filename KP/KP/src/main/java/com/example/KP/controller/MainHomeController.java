@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,7 +23,7 @@ public class MainHomeController {
     private final BookService bookService;
     private final ImageService imageService;
     private final GenreService genreService;
-    @GetMapping
+    @GetMapping("/")
     public String open(Model model)
     {
         Iterable<Book> books = bookService.readBook();
@@ -42,12 +43,20 @@ public class MainHomeController {
         return "mainHome";
     }
     @GetMapping("/filter")
-    public String getBooksByGenres(@RequestParam("checkboxGenre") Long idGenre,
+    public String getBooksByGenres(@RequestParam("flexRadioDefault") Long idGenre,
                                    Model model){
         Iterable<Book> books=bookService.AllBookByGenre(idGenre);
         Iterable<Image> images = imageService.readImg();
         model.addAttribute("book", books);
         model.addAttribute("image",images);
         return "mainHome";
+    }
+    @GetMapping("bookInfo/{id}")
+    public String getBooksInfo(@PathVariable Long id, Model model){
+        Book book=bookService.getBookById(id);
+        Iterable<Image> images = imageService.readImg();
+        model.addAttribute("book", book);
+        model.addAttribute("image",images);
+        return "Book-info";
     }
 }

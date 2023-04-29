@@ -3,22 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>BOOKSELL</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cerulean/bootstrap.min.css">
+
 </head>
 <body>
-<div class="col-lg-4" th:each="e:${book}">
-    <form th:action="*{'/home/book/delete/' + e.getId() }" method="get">
-        <h1>Информация</h1>
-        <img th:src="*{'/image/' + e.previewImageId }" height="300px" alt="alt"/><br><br>
-        <b>Название: </b><b th:text="${e.name}"/> <br>
-        <b>Цена: </b><b th:text="${e.cost}"/> <br>
-        <div th:if="${genre}!=null" th:each="g:${genre}">
-            <b>Жанр: </b><b th:text="${g.name}"/> <br>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="d-flex ">
+            <div class="col">
+                <div class="">
+                    <img th:src="*{'/image/' + book.previewImageId }" height="480px" width="400"/><img>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 rounded-3">
+                    <h1 th:text="*{book.name}"></h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 rounded-3">
+                    qweqweqwe
+                </div>
+            </div>
         </div>
-        <input type="submit" value="Удалить"/>
-        <hr>
-    </form>
-    <img>
+    </div>
 </div>
 </body>
 </html>
 
+<!--
+<div class="d-flex justify-content-between">
+    <div class="p-2">
+        <img th:src="*{'/image/' + book.previewImageId }" height="480px" width="400"/><img>
+    </div>
+    <div class="p-2" th:text="book.name"></div>
+    <div class="p-2">Flex item 3</div>
+</div>-->
